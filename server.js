@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import nodemailer from "nodemailer";
+import cors from "cors";
 
 // import env variables
 dotenv.config();
@@ -11,6 +12,13 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Cors
+const corsOptions = {
+  origin: process.env.FRONTEND_URL,
+  credentials: true,
+};
+app.use(cors(corsOptions));
 
 // create transporter
 const transporter = nodemailer.createTransport({
