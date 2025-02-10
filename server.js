@@ -51,7 +51,7 @@ app.get("/", (req, res) => {
   res.send("Welcome to the server");
 });
 
-app.post("/send", async (req, res) => {
+app.post("/api/message", async (req, res) => {
   try {
     const { fName, lName, email, phone, contactReason, subject, message } =
       req.body;
