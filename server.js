@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Cors
 const corsOptions = {
-  origin: `${process.env.FRONTEND_URL}/connect`,
+  origin: process.env.FRONTEND_URL,
   credentials: true,
 };
 app.use(cors(corsOptions));
