@@ -21,6 +21,31 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+// Mail details
+const mailDetails = (
+  fName,
+  lName,
+  email,
+  phone,
+  contactReason,
+  subject,
+  message
+) => {
+  return {
+    from: process.env.EMAIL,
+    to: process.env.EMAIL,
+    subject: "New message from portfolio",
+    html: `
+    <h1>New Message From ${fname} ${lname}</h1>
+    <p>Email: ${email}</p>
+    <p>Phone Number: ${phone}</p>
+    <p>Reason for contacting: ${contactReason}</p> 
+    <h2>${subject}</h2>
+    <p>${message}</p>
+    `,
+  };
+};
+
 // Routes
 app.get("/", (req, res) => {
   res.send("Welcome to the server");
