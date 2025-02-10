@@ -36,7 +36,7 @@ const mailDetails = (
     to: process.env.EMAIL,
     subject: "New message from portfolio",
     html: `
-    <h1>New Message From ${fname} ${lname}</h1>
+    <h1>New Message From ${fName} ${lName}</h1>
     <p>Email: ${email}</p>
     <p>Phone Number: ${phone}</p>
     <p>Reason for contacting: ${contactReason}</p> 
@@ -49,6 +49,20 @@ const mailDetails = (
 // Routes
 app.get("/", (req, res) => {
   res.send("Welcome to the server");
+});
+
+app.post("/send", async (req, res) => {
+  try {
+    const { fName, lName, email, phone, contactReason, subject, message } =
+      req.body;
+    const info = await transporter.sendMail(
+      mailDetails(fName, lName, email, phone, contactReason, subject, message)
+    );
+    console.log(info.response);
+    res.json({ message: "email sent successfully" });
+  } catch (err) {
+    res.status(500).json({ err: "Error sending email" });
+  }
 });
 
 // setup port
